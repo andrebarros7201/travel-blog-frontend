@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [posts, setPosts] = useState([]);
+
+    useEffect(  () => {
+         const fetchPosts = async () =>{
+            await fetch('http://localhost:3000/api/post')
+                .then(res => res.json())
+                .then(data => setPosts(data))
+                .catch(err => console.log(err));
+        }
+        fetchPosts()
+
+    }, []);
 
   return (
     <>
