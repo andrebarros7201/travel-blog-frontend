@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { PostContext } from "../App.jsx";
+import PostPreview from "./PostPreview.jsx";
+import styles from "../styles/posts.module.css";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -19,12 +21,11 @@ export default function Posts() {
   if (loading) {
     return <div>Loading...</div>;
   }
+
   return (
-    <main>
+    <main className={styles["post-main"]}>
       {posts.posts.map((post) => (
-        <article key={post.id}>
-          <h2>{post.title}</h2>
-        </article>
+        <PostPreview post={post} />
       ))}
     </main>
   );
